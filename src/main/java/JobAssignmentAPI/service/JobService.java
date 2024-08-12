@@ -1,7 +1,7 @@
-package com.example.JobAssignmentAPI.service;
+package JobAssignmentAPI.service;
 
-import com.example.JobAssignmentAPI.api.model.Jobs;
-import com.example.JobAssignmentAPI.api.model.Temps;
+import JobAssignmentAPI.api.model.Jobs;
+import JobAssignmentAPI.api.model.Temps;
 
 import java.util.ArrayList;
 import java.util.List;

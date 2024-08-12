@@ -1,4 +1,4 @@
-package com.example.JobAssignmentAPI.api.model;
+package JobAssignmentAPI.api.model;
 
 public class Jobs {
     private final int id;

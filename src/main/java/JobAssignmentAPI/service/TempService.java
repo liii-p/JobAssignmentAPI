@@ -1,7 +1,7 @@
-package com.example.JobAssignmentAPI.service;
+package JobAssignmentAPI.service;
 
-import com.example.JobAssignmentAPI.api.model.Jobs;
-import com.example.JobAssignmentAPI.api.model.Temps;
+import JobAssignmentAPI.api.model.Jobs;
+import JobAssignmentAPI.api.model.Temps;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,10 +15,10 @@ public class TempService {
 
     public TempService() {
         tempsList = new ArrayList<>();
-        Temps temps1 = new Temps(1, "John", "Doe", jobs);
+        Temps temps1 = new Temps("1", "John", "Doe", jobs);
     }
 
-    public Optional<Temps> getUserById(int id) {
+    public Optional<Temps> getTempById(String id) {
         Optional optional = Optional.empty();
         for (Temps temp : tempsList) {
             if (id == temp.getId()){
@@ -27,5 +27,13 @@ public class TempService {
             }
         }
         return optional;
+    }
+
+    public List<Temps> getAllTemps() {
+        return tempsList;
+    }
+
+    public void addTemp(Temps temp) {
+        tempsList.add(temp);
     }
 }

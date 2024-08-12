@@ -1,4 +1,4 @@
-package com.example.JobAssignmentAPI.service;
+package JobAssignmentAPI.service;
 
 import org.springframework.stereotype.Service;
 
