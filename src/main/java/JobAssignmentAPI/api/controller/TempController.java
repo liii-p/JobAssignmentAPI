@@ -5,36 +5,28 @@ import JobAssignmentAPI.api.model.Temps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/temps")
 public class TempController {
 
-    private final TempService tempService;
-
     @Autowired
-    public TempController(TempService tempService){
-        this.tempService = tempService;
-    }
+    private TempService tempService;
 
-    @GetMapping("/temps/{id}")
-    public Temps getTempById(@RequestParam String id) {
-        Optional temp = tempService.getTempById(id);
-        if (temp.isPresent()) {
-            return (Temps) temp.get();
-        }
-        return null;
-    }
-
-    @GetMapping("/temps")
-    public Temps getAllTemps() {
-        return (Temps) tempService.getAllTemps();
-    }
-
-    @PostMapping("/temps")
+    @PostMapping
     public Temps createTemp(@RequestBody Temps temp) {
-        tempService.addTemp(temp);
-        return temp;
+        return tempService.createTemp(temp);
     }
+
+    @GetMapping
+    public List<Temps> getAllTemps() {
+        return tempService.getAllTemps();
+    }
+
+    @GetMapping("/{id}")
+    public Temps getTempById(@PathVariable Integer id) {
+        return tempService.getTempById(id);
+    }
+
 }

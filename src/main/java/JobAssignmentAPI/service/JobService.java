@@ -2,27 +2,38 @@ package JobAssignmentAPI.service;
 
 import JobAssignmentAPI.api.model.Jobs;
 import JobAssignmentAPI.api.model.Temps;
+import JobAssignmentAPI.repo.JobAssignmentInfoRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class JobService {
-    private List<Jobs> jobsList;
+    @Autowired
+    private JobAssignmentInfoRepo jobAssignmentInfoRepo;
 
-    public JobService() {
-        jobsList = new ArrayList<>();
-        Jobs job1 = new Jobs(1, "Software Developer", "03/11/24", "12/12/25");
+    public Jobs createJob(Jobs job) {
+        return jobAssignmentInfoRepo.save(job);
     }
 
-    public Optional<Temps> getUserById(int id) {
-        Optional optional = Optional.empty();
-        for (Jobs job : jobsList) {
-            if (id == job.getId()){
-                optional = Optional.of(job);
-                return optional;
-            }
-        }
-        return optional;
+    public List<Jobs> getAllJobs() {
+        return jobAssignmentInfoRepo.findAll();
     }
+
+    /*public List<Jobs> getJobsByAssigned(boolean assigned) {
+        //return something here
+    }*/
+
+    public Jobs getJobById(Integer id) {
+        return jobAssignmentInfoRepo.findById(id).orElse(null);
+    }
+
+    public Jobs updateJob(Integer id, Jobs job) {
+        job.setId(id);
+        return jobAssignmentInfoRepo.save(job);
+    }
+
 }

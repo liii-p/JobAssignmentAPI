@@ -2,6 +2,8 @@ package JobAssignmentAPI.service;
 
 import JobAssignmentAPI.api.model.Jobs;
 import JobAssignmentAPI.api.model.Temps;
+import JobAssignmentAPI.repo.TempsInfoRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,30 +12,19 @@ import java.util.Optional;
 
 @Service
 public class TempService {
-    private List<Temps> tempsList;
-    private Jobs jobs;
+    @Autowired
+    private TempsInfoRepo tempsInfoRepo;
 
-    public TempService() {
-        tempsList = new ArrayList<>();
-        Temps temps1 = new Temps("1", "John", "Doe", jobs);
-    }
-
-    public Optional<Temps> getTempById(String id) {
-        Optional optional = Optional.empty();
-        for (Temps temp : tempsList) {
-            if (id == temp.getId()){
-                optional = Optional.of(temp);
-                return optional;
-            }
-        }
-        return optional;
+    public Temps createTemp(Temps temp) {
+        return tempsInfoRepo.save(temp);
     }
 
     public List<Temps> getAllTemps() {
-        return tempsList;
+        return tempsInfoRepo.findAll();
     }
 
-    public void addTemp(Temps temp) {
-        tempsList.add(temp);
+    public Temps getTempById(Integer id) {
+        return tempsInfoRepo.findById(id).orElse(null);
     }
+
 }
